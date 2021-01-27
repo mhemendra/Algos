@@ -74,6 +74,48 @@ def createBST(arr,start,end):
     node.right = createBST(arr,mid+1,end)
     return node
 
+def checkBST(tree,lastElement=-100):
+    if(tree.left is not None):
+        lastElement=checkBST(tree.left,lastElement)
+    if(lastElement >= tree.data or lastElement==-1):
+        return -1
+    else:
+        lastElement = tree.data
+    if(tree.right is not None):
+        lastElement=checkBST(tree.right,lastElement)
+    return lastElement
+
+def createDictofLevels(tree):
+    rootNode = tree
+    levels = {}
+    i=0
+    levels.setdefault(i, [])
+    levels[i].append(rootNode)
+    while not len(levels[i])==0:
+        i=i+1
+        levels.setdefault(i, [])
+        for node in levels[i-1]:
+            children = node.getChildren()
+            levels[i].extend(children)
+    return levels
+
+def createListOfListsPerLevel(root):
+    levels = []
+    i=0
+    parent = [root]
+    levels.append(parent)
+    while not len(levels[i])==0:
+        i=i+1
+        currentLevel = []
+        for node in levels[i-1]:
+            children = node.getChildren()
+            for child in children:
+                currentLevel.append(child)
+        if not(len(currentLevel)==0):#code enters once after last level but there are no children in currentLevel,
+            levels.append(currentLevel)#so breadking out of loop else the levels[i] index i doesnt exist and
+        else:# there is a index out of bounds exception during next loop
+            break
+    return levels
 
 if __name__ == '__main__':
     tree = Tree()
@@ -94,5 +136,6 @@ if __name__ == '__main__':
     node6.left = TreeNode(8)
     arr = [i for i in range(12)]
     output = createBST(arr)
-    #traverseTreeInOrder(output)
-    depthFirst(output)
+    map = createListOfListsPerLevel(output)
+    print(map)
+    #depthFirst(output)
