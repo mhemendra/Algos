@@ -35,6 +35,7 @@ def traverseTreeInOrder(tree):
 @dispatch(list)
 def createBST(arr):
     return createBST(arr, 0, len(arr)-1)
+
 @dispatch(list,int,int)
 def createBST(arr,start,end):
     if start>end:
