@@ -31,6 +31,13 @@ class Solution:
         backtrack()
         return ans
 
-c= Solution()
-output = c.generateParenthesis(2)
-print(output)
+def backtrack(n, left = 0, right = 0, path="", ans=[]):
+    if left==right==n:
+        ans.append(path)
+        return
+    print(left, n)
+    if left < n:
+        backtrack(n, left+1, right, path+'(')
+    if right < left:
+        backtrack(n, left, right+1, path+')')
+    return ans
