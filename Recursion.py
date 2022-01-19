@@ -1,4 +1,5 @@
 import math
+import numpy as np
 def generateFibonacci(n,elem = [0,1]):
         if len(elem) <= n:
             sum = generateFibonacci(n-1,elem) + generateFibonacci(n-2,elem)
@@ -30,10 +31,11 @@ def totalWaysToClimbArr(n, elem = [0, 1]):
         return elem[n]
 
 def roboGrid(grid, r, c, path = []):
+    print(r,c)
     if (r<0 or c<0 or grid[r,c] == 1):
         return False
     if(r==c==0 or roboGrid(grid,r-1,c, path) or roboGrid(grid,r, c-1, path)):
-        print(path)
+        #print(path)
         path.append([r,c])
         return True
     return False
@@ -117,4 +119,8 @@ def paintFill(row, col, arr=[]):
         paintFill(row, col-1, arr)
         return arr
 
-print(paintFill(3, 3))
+grid = np.zeros([4,4])
+grid[0,1] = 1
+roboGrid(grid, 3, 3)
+
+print()
