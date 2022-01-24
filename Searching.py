@@ -40,7 +40,31 @@ def sortedMerge(arrA, arrB):
         indexMerged -= 1
     return mergedArr
 
+def searchNoSize(arr,elem):
+    i=1
+    try:# the Listy should return -1 is out of range
+        while not arr[i] == -1:
+            if arr[i] > elem:# means the element is before i
+                return searchElem(arr, elem, i//2, i)
+            i *= 2
+    except:
+        return searchElem(arr, elem, i//2, i) #if the ith element return -1, there will be some elements after i-10
+
+def searchElem(arr, elem, low, high):
+    print(arr, elem, low, high)
+    for i in range(low, high):
+        try:
+            if arr[i] == elem:
+                return i
+        except:
+            return -1
+
+arr = [10,20,30,40,50,60,70,80,90,95,100,110]
+elem = 111
+
+print(searchNoSize(arr, elem))
+
 arrA = [4,6,8,9]
 arrB = [1,2,3]
 
-print(sortedMerge(arrA,arrB))
+#print(sortedMerge(arrA,arrB))

@@ -122,23 +122,49 @@ def findLeftBranch(node):
     else:
         findLeftBranch(parent)
 
+def commonAncestor(root, node1, node2):
+    node1Dir = findNodeDir(root, node1)
+    node2Dir = findNodeDir(root, node2)
+    if not node1Dir == node2Dir:
+        return root.data
+    elif node1Dir==1:
+        return commonAncestor(root.left, node1, node2)
+    elif node1Dir==2:
+        return commonAncestor(root.right, node1, node2)
+
+def findNodeDir(root, node):
+    if findNode(root.left, node):
+        return 1#Left
+    elif findNode(root.right, node):
+        return 2#Right
+#We can even combine the two functions(findNodeDir, findNode) to return True if node found on left,
+#Else it must be on the right
+def findNode(root, node):
+    if root.data == node.data:
+        return True
+    elif root.left is not None and findNode(root.left, node):
+        return True
+    elif root.right is not None and findNode(root.right, node):
+        return True
+    else:
+        return False
+
+
 
 if __name__ == '__main__':
     tree = Tree()
-    node1 = TreeNode(20)
-    node2 = TreeNode(10)
-    node3 = TreeNode(10)
+    node1 = TreeNode(1)
+    node2 = TreeNode(2)
+    node3 = TreeNode(3)
     tree.root = node1
     node1.left = node2
     node1.right = node3
-    node4 = TreeNode(10)
+    node4 = TreeNode(4)
     node5 = TreeNode(5)
     node6 = TreeNode(6)
     node7 = TreeNode(7)
-    #node2.right = node4
-    #node4.right = node5
+    node2.right = node4
+    node2.left = node5
     #node2.right = node6
     #node3.right = node7
-    checkBSTClass = checkBSTClass()
-    output = checkBSTClass.checkBSTBool(tree.root)
-    print("Final:",output)
+    print(commonAncestor(tree.root, node2, node7))

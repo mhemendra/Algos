@@ -16,7 +16,7 @@ class Queue:
         itemNode = Node(item)
         #Here both first and last are set to same node when null, so when we update last.next the first.next is also updated
         #But since last=itemNode the next addition, its value changes so first.next goes till end but last has only last element
-        if(self.isEmpty()):
+        if self.isEmpty():
             self.first = itemNode
             self.size+=1
         else:
@@ -25,13 +25,13 @@ class Queue:
         self.last = itemNode
 
     def remove(self):
-        if(self.isEmpty()):
+        if self.isEmpty():
             raise Exception("Empty Queue")
         else:
             item = self.first.data
             self.first = self.first.next
             #Else last still has last value
-            if(self.first==None):
+            if self.first is None:
                 self.last=None
             self.size-=1
             return item
