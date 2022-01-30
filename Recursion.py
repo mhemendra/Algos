@@ -1,5 +1,6 @@
 import math
 import numpy as np
+from Queue import Queue
 def generateFibonacci(n,elem = [0,1]):
         if len(elem) <= n:
             sum = generateFibonacci(n-1,elem) + generateFibonacci(n-2,elem)
@@ -109,6 +110,19 @@ def towersOfHanoi(numDisks, arrOut, start=1, buffer=2, end=3):
 
         return arrOut
 
+def reverseQueue(q1):
+    #top = 0
+    if not q1.isEmpty():
+        top = q1.remove()
+        #s2.push(s1.pop())
+        reverseQueue(q1)
+        q1.add(top)
+    return q1
+
+    #return s2
+
+
+
 def paintFill(row, col, arr=[]):
     if row==0 or col==0:
         return
@@ -121,6 +135,16 @@ def paintFill(row, col, arr=[]):
 
 grid = np.zeros([4,4])
 grid[0,1] = 1
-roboGrid(grid, 3, 3)
+#roboGrid(grid, 3, 3)
+q1 = Queue()
+for i in range(5):
+    q1.add(i)
+
+output = reverseQueue(q1)
+#print(output.pop())
+
+while not output.isEmpty():
+    print(output.remove())
+
 
 print()

@@ -11,7 +11,7 @@ def traverseTreePreOrder(tree):
 
 def depthFirst(tree):
     print(tree.data)
-    children = tree.getChildren()
+    children = tree.getChilldren()
     for child in children:
         depthFirst(child)
 

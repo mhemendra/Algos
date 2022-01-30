@@ -13,6 +13,8 @@ def search(arr, elem):
     return False
 
 def searchRecursively(arr, elem, low, high):
+    if low>high:
+        return
     mid = (high + low)//2
     if arr[mid] == elem:
         return mid
@@ -59,10 +61,10 @@ def searchElem(arr, elem, low, high):
         except:
             return -1
 
-arr = [10,20,30,40,50,60,70,80,90,95,100,110]
-elem = 111
+arr = [2,2]
+elem = 3
 
-print(searchNoSize(arr, elem))
+print(searchRecursively(arr, elem,0,2))
 
 arrA = [4,6,8,9]
 arrB = [1,2,3]
